@@ -1,13 +1,22 @@
 class Solution:
     def reverse(self, x):
-        j = 0
-        while True:
-            j = j * 10 + x % 10
-            x /= 10
-            if x == 0:
-                break
-        return j
+        if x == 0:
+            return 0
+
+        neg = 1
+        if x < 0:
+            neg, x = -1, -x
+
+        reverse = 0
+        while x > 0:
+            reverse = reverse * 10 + x % 10
+            x = x // 10
+
+        reverse = reverse * neg
+        if reverse < -(1 << 31) or reverse > (1 << 31) - 1:
+            return 0
+        return reverse
 
 
 s = Solution()
-print(s.reverse(16))
+print('The reverse is {}'.format(s.reverse(123)))
